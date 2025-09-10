@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5891635230182660"
+    crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>梦镜星轨 | Oneiria - 个性化二维码生成器</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <!-- 背景星空效果 -->
         <div class="stars"></div>
         <div class="twinkling"></div>
-        
+
         <!-- 主标题 -->
         <header class="header">
             <h1 class="title">
@@ -28,7 +34,7 @@
             <div class="input-group">
                 <label for="url-input" class="input-label">输入您的URL</label>
                 <input type="url" id="url-input" class="url-input" placeholder="https://example.com" required>
-                
+
                 <!-- 图片上传区域 -->
                 <div class="image-upload-section">
                     <label for="bg-image-upload" class="upload-label">
@@ -41,14 +47,14 @@
                         </div>
                     </label>
                     <input type="file" id="bg-image-upload" accept="image/*" style="display: none;">
-                    
+
                     <!-- 图片预览 -->
                     <div class="image-preview" id="image-preview" style="display: none;">
                         <img id="preview-img" alt="背景预览">
                         <button type="button" class="remove-image-btn" id="remove-image-btn">✕</button>
                     </div>
                 </div>
-                
+
                 <button id="generate-btn" class="generate-btn">
                     <span class="btn-text">生成星轨二维码</span>
                     <div class="btn-loading" style="display: none;">
@@ -79,7 +85,7 @@
                     <div class="sakura sakura-5"></div>
                 </div>
             </div>
-            
+
             <!-- 操作按钮 -->
             <div class="action-buttons">
                 <button id="download-btn" class="action-btn download-btn">
@@ -92,7 +98,7 @@
                     <span>生成新的</span>
                 </button>
             </div>
-            
+
             <!-- 分享链接区域 -->
             <div class="share-section" id="share-section" style="display: none;">
                 <h3 class="share-title">分享链接</h3>
@@ -111,7 +117,7 @@
         <!-- 配置选项 -->
         <div class="config-section" id="config-section" style="display: none;">
             <h3 class="config-title">个性化设置</h3>
-            
+
             <div class="config-groups">
                 <!-- 基础设置组 -->
                 <div class="config-group">
@@ -184,4 +190,5 @@
     <!-- 脚本 -->
     <script type="module" src="/script.js"></script>
 </body>
+
 </html>
