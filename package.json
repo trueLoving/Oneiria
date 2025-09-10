@@ -1,0 +1,28 @@
+{
+  "name": "oneiria-qr-generator",
+  "version": "1.0.0",
+  "description": "梦镜星轨 | Oneiria - 个性化动态二维码生成器",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run dev"
+  },
+  "keywords": [
+    "二维码",
+    "动态效果",
+    "星旋",
+    "樱花",
+    "个性化"
+  ],
+  "author": "Oneiria Team",
+  "license": "MIT",
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "gif.js": "^0.2.0",
+    "qrcode": "^1.5.3"
+  }
+}

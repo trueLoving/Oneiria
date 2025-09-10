@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>梦镜星轨 | Oneiria - 个性化二维码生成器</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 背景星空效果 -->
+        <div class="stars"></div>
+        <div class="twinkling"></div>
+        
+        <!-- 主标题 -->
+        <header class="header">
+            <h1 class="title">
+                <span class="title-main">梦镜星轨</span>
+                <span class="title-sub">Oneiria</span>
+            </h1>
+            <p class="subtitle">个性化动态二维码生成器</p>
+        </header>
+
+        <!-- 输入区域 -->
+        <div class="input-section">
+            <div class="input-group">
+                <label for="url-input" class="input-label">输入您的URL</label>
+                <input type="url" id="url-input" class="url-input" placeholder="https://example.com" required>
+                
+                <!-- 图片上传区域 -->
+                <div class="image-upload-section">
+                    <label for="bg-image-upload" class="upload-label">
+                        <div class="upload-area" id="upload-area">
+                            <div class="upload-icon">📷</div>
+                            <div class="upload-text">
+                                <span class="upload-title">上传背景图片</span>
+                                <span class="upload-subtitle">点击选择或拖拽图片到此处</span>
+                            </div>
+                        </div>
+                    </label>
+                    <input type="file" id="bg-image-upload" accept="image/*" style="display: none;">
+                    
+                    <!-- 图片预览 -->
+                    <div class="image-preview" id="image-preview" style="display: none;">
+                        <img id="preview-img" alt="背景预览">
+                        <button type="button" class="remove-image-btn" id="remove-image-btn">✕</button>
+                    </div>
+                </div>
+                
+                <button id="generate-btn" class="generate-btn">
+                    <span class="btn-text">生成星轨二维码</span>
+                    <div class="btn-loading" style="display: none;">
+                        <div class="spinner"></div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- 二维码显示区域 -->
+        <div class="qr-section" id="qr-section" style="display: none;">
+            <div class="qr-container">
+                <div class="qr-wrapper">
+                    <canvas id="qrcode" class="qr-canvas"></canvas>
+                    <!-- 星旋效果 -->
+                    <div class="star-spiral">
+                        <div class="spiral-ring ring-1"></div>
+                        <div class="spiral-ring ring-2"></div>
+                        <div class="spiral-ring ring-3"></div>
+                    </div>
+                </div>
+                <!-- 樱花飘落效果 -->
+                <div class="sakura-container">
+                    <div class="sakura sakura-1"></div>
+                    <div class="sakura sakura-2"></div>
+                    <div class="sakura sakura-3"></div>
+                    <div class="sakura sakura-4"></div>
+                    <div class="sakura sakura-5"></div>
+                </div>
+            </div>
+            
+            <!-- 操作按钮 -->
+            <div class="action-buttons">
+                <button id="download-btn" class="action-btn download-btn">
+                    <span>下载静态图</span>
+                </button>
+                <button id="share-btn" class="action-btn share-btn">
+                    <span>生成分享链接</span>
+                </button>
+                <button id="new-qr-btn" class="action-btn new-btn">
+                    <span>生成新的</span>
+                </button>
+            </div>
+            
+            <!-- 分享链接区域 -->
+            <div class="share-section" id="share-section" style="display: none;">
+                <h3 class="share-title">分享链接</h3>
+                <div class="share-input-group">
+                    <input type="text" id="share-url" class="share-url-input" readonly>
+                    <button id="copy-share-btn" class="copy-btn">
+                        <span>复制</span>
+                    </button>
+                </div>
+                <div class="share-info" id="share-info">
+                    <p class="share-description">复制此链接分享给他人，他们可以直接访问相同的二维码配置</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 配置选项 -->
+        <div class="config-section" id="config-section" style="display: none;">
+            <h3 class="config-title">个性化设置</h3>
+            
+            <div class="config-groups">
+                <!-- 基础设置组 -->
+                <div class="config-group">
+                    <h4 class="group-title">基础设置</h4>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="size-slider">二维码大小</label>
+                            <input type="range" id="size-slider" min="200" max="400" value="300">
+                            <span id="size-value">300px</span>
+                        </div>
+                        <div class="config-item">
+                            <label for="error-level">容错级别</label>
+                            <select id="error-level">
+                                <option value="L">低 (7%)</option>
+                                <option value="M" selected>中 (15%)</option>
+                                <option value="Q">较高 (25%)</option>
+                                <option value="H">高 (30%)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 颜色设置组 -->
+                <div class="config-group">
+                    <h4 class="group-title">颜色设置</h4>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="qr-foreground-color">二维码颜色</label>
+                            <input type="color" id="qr-foreground-color" value="#000000">
+                            <div class="color-extracted-info" id="color-extracted-info" style="display: none;">
+                                <span class="extracted-color-label">从背景图片提取</span>
+                                <div class="color-preview" id="color-preview"></div>
+                            </div>
+                        </div>
+                        <div class="config-item">
+                            <label for="qr-background-color">背景颜色</label>
+                            <input type="color" id="qr-background-color" value="#ffffff">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 背景效果组 -->
+                <div class="config-group">
+                    <h4 class="group-title">背景效果</h4>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label for="bg-opacity">背景透明度</label>
+                            <input type="range" id="bg-opacity" min="0.1" max="1" step="0.1" value="0.8">
+                            <span id="opacity-value">0.8</span>
+                        </div>
+                        <div class="config-item">
+                            <label for="bg-blend-mode">混合模式</label>
+                            <select id="bg-blend-mode">
+                                <option value="normal">正常</option>
+                                <option value="multiply">正片叠底</option>
+                                <option value="overlay">叠加</option>
+                                <option value="soft-light">柔光</option>
+                                <option value="hard-light">强光</option>
+                                <option value="color-dodge">颜色减淡</option>
+                                <option value="color-burn">颜色加深</option>
+                                <option value="screen">滤色</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 脚本 -->
+    <script type="module" src="/script.js"></script>
+</body>
+</html>
